@@ -1,0 +1,250 @@
+@tailwind base;
+:root {
+  /* --background: 222.2 84% 4.9%; */
+  --background: 7 90% 60%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 217.2 91.2% 59.8%;
+  --primary-foreground: 222.2 84% 4.9%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 224.3 76.3% 94.1%;
+  --radius: 0.5rem;
+}
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  @apply bg-gradient-to-br from-slate-200 via-gray-50 to-amber-50 text-white min-h-screen;
+  font-family: 'Inter', sans-serif;
+}
+
+.glass-effect {
+  @apply bg-white/30 backdrop-blur-lg border border-white/30;
+  /* más claro para que contraste con fondo blanco */
+}
+.glass-effect2 {
+  @apply bg-black/10 backdrop-blur-lg border border-white/30 shadow-lg;
+}
+.property-card {
+  @apply glass-effect rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg;
+}
+
+.carousel-container {
+  @apply relative overflow-hidden rounded-2xl h-[60vh] md:h-96;
+}
+
+.carousel-slide {
+  @apply min-w-full transition-transform duration-500 ease-in-out;
+}
+
+.filter-input {
+  @apply glass-effect rounded-lg px-4 py-2 text-gray-900 placeholder-gray-500 border-gray-300 focus:border-amber-500 focus:outline-none w-full;
+}
+
+.btn-primary {
+  @apply bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-600 hover:to-amber-500 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 transform hover:scale-105;
+}
+
+.btn-secondary {
+  @apply glass-effect text-gray-900 font-semibold py-2 px-6 rounded-lg transition-all duration-300 hover:bg-white/30;
+}
+
+.btn-danger {
+  @apply bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300;
+}
+
+.btn-success {
+  @apply bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-600 hover:to-amber-500 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300;
+}
+
+.form-input {
+  @apply glass-effect rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 border-gray-300 focus:border-amber-500 focus:outline-none w-full;
+}
+
+.modal-overlay {
+  @apply fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center p-4;
+}
+
+.modal-content {
+  @apply glass-effect rounded-2xl p-4 sm:p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto;
+}
+
+.grid-container {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6;
+}
+
+.admin-table {
+  @apply glass-effect rounded-xl overflow-hidden;
+}
+
+.table-header {
+  @apply bg-white/30 px-4 sm:px-6 py-4 font-semibold text-gray-900 border-b border-white/30;
+}
+
+.table-cell {
+  @apply px-4 sm:px-6 py-4 text-gray-800 border-b border-white/70;
+}
+
+.navbar {
+  @apply glass-effect border-b border-white/30 sticky top-0 z-40;
+}
+
+.hero-section {
+  @apply relative min-h-[80vh] md:min-h-[60vh] flex items-center justify-center text-center px-4;
+}
+
+.hero-bg {
+  @apply absolute inset-0 bg-gradient-to-r from-amber-400/20 to-yellow-400/20;
+}
+
+.property-badge {
+  @apply absolute top-4 right-4 bg-gradient-to-r from-amber-700 to-amber-500 text-white px-3 py-1 rounded-full text-sm font-semibold;
+}
+
+.search-container {
+  @apply glass-effect2 rounded-2xl p-4 sm:p-6 mb-8 ;
+}
+
+.carousel-nav {
+  @apply absolute top-1/2 transform -translate-y-1/2 bg-white/30 hover:bg-white/50 text-gray-900 p-2 md:p-3 rounded-full transition-all duration-300 backdrop-blur-sm;
+}
+
+.carousel-indicators {
+  @apply absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2;
+}
+
+.carousel-dot {
+  @apply w-2 h-2 md:w-3 md:h-3 rounded-full bg-gray-400/50 hover:bg-amber-500/80 transition-all duration-300 cursor-pointer;
+}
+
+.carousel-dot.active {
+  @apply bg-amber-500;
+}
+
+
+
+
+/* 
+body {
+  @apply bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white min-h-screen;
+  font-family: 'Inter', sans-serif;
+}
+
+.glass-effect {
+  @apply bg-white/10 backdrop-blur-lg border border-white/20;
+}
+
+.property-card {
+  @apply glass-effect rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl;
+}
+
+.carousel-container {
+  @apply relative overflow-hidden rounded-2xl h-[60vh] md:h-96;
+}
+
+.carousel-slide {
+  @apply min-w-full transition-transform duration-500 ease-in-out;
+}
+
+.filter-input {
+  @apply glass-effect rounded-lg px-4 py-2 text-white placeholder-white/60 border-white/30 focus:border-blue-400 focus:outline-none w-full;
+}
+
+.btn-primary {
+  @apply bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 transform hover:scale-105;
+}
+
+.btn-secondary {
+  @apply glass-effect text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 hover:bg-white/20;
+}
+
+.btn-danger {
+  @apply bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300;
+}
+
+.btn-success {
+  @apply bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300;
+}
+
+.form-input {
+  @apply glass-effect rounded-lg px-4 py-3 text-white placeholder-white/60 border-white/30 focus:border-blue-400 focus:outline-none w-full;
+}
+
+.modal-overlay {
+  @apply fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4;
+}
+
+.modal-content {
+  @apply glass-effect rounded-2xl p-4 sm:p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto;
+}
+
+.grid-container {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6;
+}
+
+.admin-table {
+  @apply glass-effect rounded-xl overflow-hidden;
+}
+
+.table-header {
+  @apply bg-white/20 px-4 sm:px-6 py-4 font-semibold text-white border-b border-white/20;
+}
+
+.table-cell {
+  @apply px-4 sm:px-6 py-4 text-white/90 border-b border-white/10;
+}
+
+.navbar {
+  @apply glass-effect border-b border-white/20 sticky top-0 z-40;
+}
+
+.hero-section {
+  @apply relative min-h-[80vh] md:min-h-[60vh] flex items-center justify-center text-center px-4;
+}
+
+.hero-bg {
+  @apply absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20;
+}
+
+.property-badge {
+  @apply absolute top-4 right-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1 rounded-full text-sm font-semibold;
+}
+
+.search-container {
+  @apply glass-effect rounded-2xl p-4 sm:p-6 mb-8;
+}
+
+.carousel-nav {
+  @apply absolute top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 md:p-3 rounded-full transition-all duration-300 backdrop-blur-sm;
+}
+
+.carousel-indicators {
+  @apply absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2;
+}
+
+.carousel-dot {
+  @apply w-2 h-2 md:w-3 md:h-3 rounded-full bg-white/50 hover:bg-white/80 transition-all duration-300 cursor-pointer;
+}
+
+.carousel-dot.active {
+  @apply bg-white;
+} */
