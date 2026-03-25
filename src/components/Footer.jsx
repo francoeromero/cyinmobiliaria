@@ -12,7 +12,6 @@ import {
   MapPin,
   Instagram,
   Facebook,
-  Linkedin,
   Twitter,
   Youtube
 } from 'lucide-react';
@@ -40,7 +39,6 @@ const Footer = () => {
   const socialIcons = [
     // { icon: Instagram, link: 'https://www.instagram.com/estudio__rc/' },
     // { icon: Facebook, link: 'https://www.facebook.com/estudioRC.ArqyDesarrollos' },
-    { icon: Linkedin, link: '#' },
     // { icon: Twitter, link: '#' },
     // { icon: Youtube, link: '#' }
   ];

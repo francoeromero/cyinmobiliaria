@@ -6,8 +6,8 @@ import { Users, Award, TrendingUp, Heart, Shield, Star } from 'lucide-react';
 
 const AboutPage = () => {
   const stats = [
-    { icon: TrendingUp, label: 'Propiedades Vendidas', value: '60+', color: 'text-blue-400' },
-    { icon: Award, label: 'Años de Experiencia', value: '5+', color: 'text-green-400' },
+    { icon: TrendingUp, label: 'Propiedades Vendidas', value: '160', color: 'text-blue-400' },
+    { icon: Award, label: 'Años de Experiencia', value: '8', color: 'text-green-400' },
     { icon: Users, label: 'Clientes Satisfechos', value: '100+', color: 'text-purple-400' },
     { icon: Star, label: 'Calificación Promedio', value: '5/5', color: 'text-yellow-400' }
   ];
@@ -68,18 +68,14 @@ const AboutPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div>
                 <p className="text-black/80 text-base sm:text-lg leading-relaxed mb-4">
-                  En Estudio RC combinamos más de 30 años de trayectoria en la construcción con más de 5 años de experiencia en la comercialización de inmuebles. Somos un estudio de arquitectura que entiende el valor de cada proyecto, desde su diseño hasta su venta. Acompañamos a nuestros clientes en todo el proceso de venta, desde la evaluación del inmueble, la estrategia comercial, la producción de material visual y técnico, hasta el cierre de la operación. Trabajamos con compromiso, visión técnica y profundo conocimiento del mercado para lograr desarrollos sólidos y operaciones exitosas.
-                </p>
-                <p className="text-black/80 text-base sm:text-lg leading-relaxed">
-                  Nuestro compromiso con la excelencia y la satisfacción del cliente nos ha permitido construir 
-                  relaciones duraderas y ayudar a miles de familias a encontrar su hogar ideal.
+                  Con mas de 8 años en el rubro inmobiliario, nos destacamos por nuestro compromiso, pasion y amplios planes de financiación. Acompañamos a las familias en cada paso del recorrido y entregamos llave en mano su futuro hogar. Mas de 100 familias nos avalan y continuamos trabajando para mejorar dia a dia nuestros proyectos.
                 </p>
               </div>
               <div className="relative">
                 <img  
-                  className="w-full h-64 object-cover rounded-xl"
-                  alt="Equipo de CY Desarrollos Inmobiliarios trabajando en oficina moderna"
-                 src="https://images.unsplash.com/photo-1636373466162-330695a2af88" />
+                  className="w-full h-auto object-cover rounded-xl"
+                  alt="CY Desarrollos Inmobiliarios - Proyectos inmobiliarios"
+                  src="/img/img_nosotros.jpeg" />
               </div>
             </div>
           </div>
@@ -148,7 +144,7 @@ const AboutPage = () => {
             </h2>
             <p className="text-black/70 text-base sm:text-lg mb-8 max-w-2xl mx-auto">
               Nuestro equipo de expertos está aquí para ayudarte en cada paso del proceso. 
-              Desde la búsqueda inicial hasta la firma del contrato, te acompañamos para que encuentres la propiedad perfecta.
+              Desde la búsqueda inicial hasta la firma de la escritura, te acompañamos para que encuentres la propiedad perfecta.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button

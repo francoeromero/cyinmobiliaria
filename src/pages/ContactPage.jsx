@@ -147,14 +147,6 @@ const ContactPage = () => {
 >
   Instagram
 </a></button>
-                  <button className="btn-secondary flex-1"><a
-  href="https://www.linkedin.com/in/tu_perfil"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="btn-secondary flex-1 text-center"
->
-  LinkedIn
-</a></button>
                 </div>
               </div>
             </motion.div>

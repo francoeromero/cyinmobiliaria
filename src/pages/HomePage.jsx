@@ -153,13 +153,6 @@ useEffect(() => {
     >
       {/* Contenedor con glass effect y borde dorado */}
       <div className="glass-effect rounded-2xl p-8 sm:p-12 border-2 border-amber-400/50 shadow-lg">
-        {/* Línea decorativa superior */}
-        <div className="flex items-center justify-center mb-8">
-          <div className="h-1 w-12 bg-gradient-to-r from-transparent to-amber-400"></div>
-          <div className="h-3 w-3 bg-amber-400 rounded-full mx-4"></div>
-          <div className="h-1 w-12 bg-gradient-to-l from-transparent to-amber-400"></div>
-        </div>
-
         {/* Título con color dorado */}
         <h2 className="text-4xl sm:text-5xl font-bold text-center mb-2">
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300">
@@ -181,13 +174,6 @@ useEffect(() => {
           <p>
             Brindamos acompañamiento integral en todas las etapas del proceso, con profesionalismo, compromiso y experiencia.
           </p>
-        </div>
-
-        {/* Línea decorativa inferior */}
-        <div className="flex items-center justify-center mt-8">
-          <div className="h-1 w-12 bg-gradient-to-r from-transparent to-amber-400"></div>
-          <div className="h-3 w-3 bg-amber-400 rounded-full mx-4"></div>
-          <div className="h-1 w-12 bg-gradient-to-l from-transparent to-amber-400"></div>
         </div>
       </div>
     </motion.div>
