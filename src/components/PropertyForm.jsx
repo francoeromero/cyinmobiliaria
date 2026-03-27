@@ -1,8 +1,17 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { X, Save, Upload } from 'lucide-react';
+import { X, Save, Plus, Trash2 } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
+import { getPropertyImageUrls } from '@/utils/propertyImages';
+
+const FALLBACK_IMAGE =
+  'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop&crop=center';
+
+const imageUrlsForForm = (prop) => {
+  const urls = getPropertyImageUrls(prop);
+  return urls.length ? urls : [''];
+};
 
 const PropertyForm = ({ property, isOpen, onClose, onSave }) => {
   const { toast } = useToast();
@@ -16,7 +25,7 @@ const PropertyForm = ({ property, isOpen, onClose, onSave }) => {
     bathrooms: '',
     area: '',
     description: '',
-    image: '',
+    imageUrls: [''],
     acceptsSquareMeters: 'No' // nuevo campo
   });
 
@@ -26,15 +35,15 @@ const PropertyForm = ({ property, isOpen, onClose, onSave }) => {
     //   setFormData(property);
     // } 
     if (property) {
-    setFormData({
-      ...property,
-      acceptsSquareMeters: property.acceptsSquareMeters || 'No'
-    });
-  } 
-
-    else {
+      setFormData({
+        ...property,
+        acceptsSquareMeters: property.acceptsSquareMeters || 'No',
+        imageUrls: imageUrlsForForm(property)
+      });
+    } else {
       setFormData({
         title: '',
+        operation: 'Venta',
         location: '',
         price: '',
         type: 'Casa',
@@ -42,7 +51,7 @@ const PropertyForm = ({ property, isOpen, onClose, onSave }) => {
         bathrooms: '',
         area: '',
         description: '',
-        image: '',
+        imageUrls: [''],
         acceptsSquareMeters: 'No'
       });
     }
@@ -61,15 +70,17 @@ const PropertyForm = ({ property, isOpen, onClose, onSave }) => {
       return;
     }
 
+    const { imageUrls, ...rest } = formData;
+    const urls = imageUrls.map((u) => String(u).trim()).filter(Boolean);
+
     const propertyData = {
-      ...formData,
+      ...rest,
       price: parseFloat(formData.price),
       bedrooms: parseInt(formData.bedrooms) || 0,
       bathrooms: parseInt(formData.bathrooms) || 0,
       area: parseFloat(formData.area) || 0,
-      // generaba un id de js que no coincidia con la db
-      // id: property?.id || Date.now(),
-      image: formData.image || `https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop&crop=center`
+      images: urls,
+      image: urls[0] || FALLBACK_IMAGE
     };
     
     // console.log('Enviando desde formulario Formdata',formData)
@@ -96,6 +107,25 @@ const PropertyForm = ({ property, isOpen, onClose, onSave }) => {
       ...prev,
       [name]: value
     }));
+  };
+
+  const handleImageUrlChange = (index, value) => {
+    setFormData((prev) => {
+      const next = [...prev.imageUrls];
+      next[index] = value;
+      return { ...prev, imageUrls: next };
+    });
+  };
+
+  const addImageUrlRow = () => {
+    setFormData((prev) => ({ ...prev, imageUrls: [...prev.imageUrls, ''] }));
+  };
+
+  const removeImageUrlRow = (index) => {
+    setFormData((prev) => {
+      const next = prev.imageUrls.filter((_, i) => i !== index);
+      return { ...prev, imageUrls: next.length ? next : [''] };
+    });
   };
 
   if (!isOpen) return null;
@@ -279,18 +309,43 @@ const PropertyForm = ({ property, isOpen, onClose, onSave }) => {
           </div>
 
 
-            <div>
+            <div className="md:col-span-2">
               <label className="block text-black/80 text-sm font-medium mb-2">
-                URL de Imagen
+                URLs de imágenes
               </label>
-              <input
-                type="url"
-                name="image"
-                value={formData.image}
-                onChange={handleChange}
-                placeholder="https://ejemplo.com/imagen.jpg"
-                className="form-input"
-              />
+              <p className="text-black/50 text-xs mb-2">
+                Podés pegar varias URLs; la primera es la que se muestra en listados y tarjetas.
+              </p>
+              <div className="space-y-2">
+                {formData.imageUrls.map((url, index) => (
+                  <div key={index} className="flex gap-2 items-start">
+                    <input
+                      type="url"
+                      value={url}
+                      onChange={(e) => handleImageUrlChange(index, e.target.value)}
+                      placeholder="https://ejemplo.com/imagen.jpg"
+                      className="form-input flex-1"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeImageUrlRow(index)}
+                      className="p-2 rounded-lg border border-black/10 text-black/60 hover:bg-black/5 shrink-0"
+                      title="Quitar URL"
+                      disabled={formData.imageUrls.length === 1 && !url}
+                    >
+                      <Trash2 className="w-5 h-5" />
+                    </button>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  onClick={addImageUrlRow}
+                  className="btn-secondary flex items-center gap-2 text-sm py-2"
+                >
+                  <Plus className="w-4 h-4" />
+                  Agregar otra imagen
+                </button>
+              </div>
             </div>
           </div>
 

@@ -17,8 +17,8 @@ const ContactPage = () => {
   const contactInfo = [
     { icon: Phone, title: 'Teléfono', details: ['+54 11 5148-7328'], color: 'text-blue-400' },
     { icon: Mail, title: 'Email', details: ['cydesarrollosinmobiliarios@gmail.com'], color: 'text-green-400' },
-    { icon: MapPin, title: 'Dirección', details: ['Buenos Aires, Argentina'], color: 'text-purple-400' },
-    { icon: Clock, title: 'Horarios', details: ['Lun - Vie: 9:00 AM - 6:00 PM', 'Sáb: 9:00 AM - 2:00 PM'], color: 'text-yellow-400' }
+    { icon: MapPin, title: 'Dirección', details: ['Florida Oeste, Buenos Aires'], color: 'text-purple-400' },
+    { icon: Clock, title: 'Horarios', details: ['Lun - Dom: 8:00 AM - 5:00 PM'], color: 'text-yellow-400' }
   ];
 
   const handleInputChange = (e) => {
@@ -120,33 +120,13 @@ const ContactPage = () => {
               <div className="glass-effect rounded-xl p-6">
                 <h3 className="text-xl font-semibold text-black/70 mb-4">Horarios de Atención</h3>
                 <div className="space-y-3">
-                  <div className="flex justify-between items-center"><span className="text-black/70">Lunes - Viernes</span><span className="text-black font-medium">9:00 AM - 6:00 PM</span></div>
-                  <div className="flex justify-between items-center"><span className="text-black/70">Sábados</span><span className="text-black font-medium">9:00 AM - 2:00 PM</span></div>
-                  <div className="flex justify-between items-center"><span className="text-black/70">Domingos</span><span className="text-black/60">Cerrado</span></div>
+                  <div className="flex justify-between items-center"><span className="text-black/70">Lunes - Domingos</span><span className="text-black font-medium">8:00 AM - 5:00 PM</span></div>
                 </div>
               </div>
               <div className="glass-effect rounded-xl p-6">
                 <h3 className="text-xl font-semibold text-black/70 mb-4">Síguenos</h3>
                 <p className="text-black/70 mb-4">Mantente al día con las últimas propiedades y noticias del mercado inmobiliario.</p>
                 <div className="flex space-x-3 ">
-                  <button className="btn-secondary flex-1">
-                    <a
-                      href="https://www.facebook.com/estudioRC.ArqyDesarrollos"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-secondary flex-1 text-center"
-                    >
-                      Facebook
-                    </a>
-                    </button>
-                  <button className="btn-secondary flex-1"><a
-  href="https://www.instagram.com/estudio__rc/"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="btn-secondary flex-1 text-center"
->
-  Instagram
-</a></button>
                 </div>
               </div>
             </motion.div>

@@ -33,7 +33,7 @@ const Footer = () => {
   const contactInfo = [
     { icon: Mail, label: 'cydesarrollosinmobiliarios@gmail.com' },
     { icon: Phone, label: '+54 11 5148-7328' },
-    { icon: MapPin, label: 'Buenos Aires, Argentina' }
+    { icon: MapPin, label: 'Florida Oeste, Buenos Aires' }
   ];
 
   const socialIcons = [

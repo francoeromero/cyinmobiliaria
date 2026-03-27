@@ -90,7 +90,7 @@ useEffect(() => {
             Todas las Propiedades
           </h1>
           <p className="text-black/70 text-base sm:text-lg max-w-2xl mx-auto">
-            Explora nuestra colección completa de propiedades inmobiliarias y encuentra tu hogar ideal.
+            Explora nuestros desarrollos y encontra la mejor financiacion
           </p>
         </motion.div>
 

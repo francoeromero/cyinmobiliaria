@@ -19,15 +19,18 @@ const Navbar = () => {
   ];
 
   return (
-  <nav style={{ borderBottom: '2px solid #f59e0b' }} className="navbar py-1">
+  <nav style={{ borderBottom: '2px solid #f59e0b' }} className="navbar overflow-visible py-1">
 
-      <div className="container mx-auto px-4 sm:px-6 py-3">
-        <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center space-x-2">
-            <div style={{ width: '82px', height: '82px' }}  className=" bg-white-lg flex items-center justify-center">
-              {/* icono */}
-              {/* <Home className="w-5 h-5 text-white" />  */}
-              <img src="/img/logo_nuevo.png" alt="Logo CY Desarrollos" className="w-19 h-15" />
+      <div className="container mx-auto overflow-visible px-4 sm:px-6 py-3">
+        <div className="flex items-center justify-between overflow-visible">
+          <Link to="/" className="relative flex items-center space-x-2 overflow-visible">
+            <div className="relative z-10 h-[82px] w-[82px] shrink-0 overflow-visible bg-white-lg">
+              <img
+                src="/img/logo_header.png"
+                alt="Logo CY Desarrollos"
+                className="absolute left-1/2 top-1/2 h-72 w-72 max-h-none max-w-none object-contain"
+                style={{ transform: 'translate(calc(-50% + 80px), -50%) scale(.8)' }}
+              />
             </div>
             {/* <span className="text-lg md:text-xl font-bold text-gray-500">RC PROPIEDADES</span> */}
           </Link>

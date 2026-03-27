@@ -119,7 +119,7 @@ useEffect(() => {
         Encuentra tu <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300">Hogar Perfecto </span>
       </h1>
       <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-        Descubre las mejores propiedades inmobiliarias con nuestra plataforma avanzada de búsqueda y gestión.
+        Descubre nuevas oportunidades de pozo y a estrenar
       </p>
 
       {/* ESTADÍSTICAS */}
