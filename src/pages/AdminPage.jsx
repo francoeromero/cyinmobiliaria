@@ -13,8 +13,8 @@ const AdminPage = () => {
 
   const [isAuthorized, setIsAuthorized] = useState(() => {
     const password = prompt("Ingrese la contraseña para acceder:");
-    // if (password !== import.meta.env.VITE_ADMIN_PASSWORD) {
-    if (password == "test") {
+    if (password !== import.meta.env.VITE_ADMIN_PASSWORD) {
+    // if (password == "test") {
       alert("Contraseña incorrecta. Redirigiendo...");
       window.location.href = "/";
       return false; 

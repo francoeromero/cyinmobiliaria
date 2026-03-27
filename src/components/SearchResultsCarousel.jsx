@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, MapPin, Bed, Bath, Square, Tag } from 'lucide-react';
+import PropertyCardMedia from '@/components/PropertyCardMedia';
 
 const SearchResultsCarousel = ({ properties, onPropertyClick }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -66,11 +67,7 @@ const SearchResultsCarousel = ({ properties, onPropertyClick }) => {
                 onClick={() => onPropertyClick(property)}
               >
                 <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={property.image}
-                    alt={property.title}
-                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                  />
+                  <PropertyCardMedia property={property} alt={property.title} />
                   <div className="property-badge">
                     ${property.price?.toLocaleString()}
                   </div>
