@@ -46,17 +46,16 @@ const Navbar = () => {
               return (
                 <Link key={item.path} to={item.path} className="relative">
                   <motion.div
-                    className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all duration-300 ${
-                      isActive 
-                        ? 'bg-black/20 text-black' 
-                        : 'text-gray-700/70 hover:text-gray hover:bg-gray/10'
+                    className={`flex items-center space-x-2 rounded-lg px-3 py-2 transition-all duration-300 ${
+                      isActive
+                        ? 'bg-black/20 text-[color:var(--brand-accent)]'
+                        : 'text-gray-700/70 hover:bg-gray/10 hover:text-gray'
                     }`}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    {/* <Icon className="w-4 h-4" /> */}
-                    <Icon className="w-6 h-6" />
-                    <span className="font-medium text-sm">{item.label}</span>
+                    <Icon className="h-6 w-6 shrink-0" />
+                    <span className="text-sm font-medium">{item.label}</span>
                   </motion.div>
                   
                   {isActive && (
@@ -100,13 +99,14 @@ const Navbar = () => {
                     key={item.path}
                     to={item.path}
                     onClick={() => setIsMenuOpen(false)}
-                    className={`w-full text-center py-3 rounded-lg flex items-center justify-center space-x-3 transition-colors duration-300 ${
-                      isActive ? 'bg-black/20 text-black' : 'text-black/80 hover:bg-white/10'
+                    className={`flex w-full items-center justify-center space-x-3 rounded-lg py-3 text-center transition-colors duration-300 ${
+                      isActive
+                        ? 'bg-black/20 text-[color:var(--brand-accent)]'
+                        : 'text-black/80 hover:bg-white/10'
                     }`}
                   >
-                    {/* <Icon className="w-5 h-5" /> */}
-                    <Icon className="w-5 h-5" />
-                      <span className={`${isActive ? 'font-bold' : 'font-normal'}`}>{item.label}</span>
+                    <Icon className="h-5 w-5 shrink-0" />
+                    <span className={isActive ? 'font-bold' : 'font-normal'}>{item.label}</span>
                   </Link>
                 );
               })}
