@@ -31,15 +31,7 @@ const PropertyCard = ({ property, onClick }) => {
             </span>
           {property.operation && (
             <div className="flex items-center gap-2">
-              <span className={`text-white font-semibold text-sm px-2 py-1 rounded ${
-                property.operation === 'Venta' 
-                  ? 'bg-amber-500/80' 
-                  : 'bg-amber-500/80'
-              }`}>
-                {property.operation}
-              </span>
-              
-
+              <span className="property-card-operation-badge">{property.operation}</span>
             </div>
           )}
           </div>
@@ -69,9 +61,7 @@ const PropertyCard = ({ property, onClick }) => {
     </span>
 
     {property.acceptsSquareMeters === 'Sí' && (
-      <span className="text-xs bg-amber-100 text-black-800 px-2 py-0.5 rounded">
-        Acepta m²
-      </span>
+      <span className="property-card-acepta-badge">Acepta m²</span>
     )}
   </div>
 )}
