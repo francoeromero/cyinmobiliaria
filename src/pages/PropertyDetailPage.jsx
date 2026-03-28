@@ -2,18 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useParams, useNavigate, useLocation, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import {
-  ArrowLeft,
-  MapPin,
-  Bed,
-  Bath,
-  Square,
-  DollarSign,
-  ChevronLeft,
-  ChevronRight
-} from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, MessageCircle } from 'lucide-react';
 import { getPropertyById } from '@/utils/localStorage';
 import { getPropertyImageUrls, getPrimaryImageUrl } from '@/utils/propertyImages';
+
+const DetailField = ({ label, value }) => (
+  <div className="border-b border-black/10 pb-3">
+    <div className="text-sm font-bold text-black">{label}</div>
+    <div className="mt-0.5 text-sm text-black/80">{value ?? '—'}</div>
+  </div>
+);
 
 const PropertyDetailPage = () => {
   const { id } = useParams();
@@ -53,6 +51,10 @@ const PropertyDetailPage = () => {
   const safeIndex = n > 0 ? Math.min(photoIndex, n - 1) : 0;
   const mainSrc = n > 0 ? images[safeIndex] : '';
 
+  const refDisplay =
+    property?.refCode ||
+    (property?.id ? `CY-${String(property.id).slice(0, 8).toUpperCase()}` : '—');
+
   const handleBack = () => {
     navigate(backPath);
   };
@@ -78,25 +80,19 @@ const PropertyDetailPage = () => {
   }
 
   return (
-    <div className="min-h-screen py-6 sm:py-10">
+    <div className="min-h-screen bg-black/[0.03] py-6 sm:py-10">
       <Helmet>
-        <title>
-          {property.title} - CY Desarrollos Inmobiliarios
-        </title>
+        <title>{property.title} - CY Desarrollos Inmobiliarios</title>
         <meta name="description" content={property.description || property.title} />
       </Helmet>
 
-      <div className="container mx-auto max-w-4xl px-4 sm:px-6">
+      <div className="container mx-auto max-w-6xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35 }}
-          className="glass-effect rounded-2xl p-5 shadow-lg sm:p-8"
         >
-          <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-            <h1 className="text-xl font-bold text-black sm:text-2xl">
-              Detalles de la Propiedad
-            </h1>
+          <div className="mb-6">
             <button
               type="button"
               onClick={handleBack}
@@ -107,21 +103,26 @@ const PropertyDetailPage = () => {
             </button>
           </div>
 
-          <div className="space-y-6">
-            <div className="relative h-64 overflow-hidden rounded-xl sm:h-80 md:h-96">
+          <div className="grid items-start gap-8 lg:grid-cols-2 lg:gap-10">
+            {/* Izquierda: carrusel principal */}
+            <div className="relative min-h-[320px] overflow-hidden rounded-xl bg-neutral-200 sm:min-h-[400px] lg:min-h-[480px] lg:max-h-[min(85vh,640px)]">
               {mainSrc ? (
                 <img
                   src={mainSrc}
                   alt={property.title}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full min-h-[320px] object-cover sm:min-h-[400px] lg:min-h-[480px]"
                 />
-              ) : null}
+              ) : (
+                <div className="flex min-h-[320px] items-center justify-center text-black/40">
+                  Sin imagen
+                </div>
+              )}
               {n > 1 && (
                 <>
                   <button
                     type="button"
                     onClick={() => setPhotoIndex((i) => (i - 1 + n) % n)}
-                    className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/40 p-2 text-white hover:bg-black/55"
+                    className="absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-neutral-700 shadow-md transition hover:bg-white"
                     aria-label="Imagen anterior"
                   >
                     <ChevronLeft className="h-6 w-6" />
@@ -129,81 +130,139 @@ const PropertyDetailPage = () => {
                   <button
                     type="button"
                     onClick={() => setPhotoIndex((i) => (i + 1) % n)}
-                    className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/40 p-2 text-white hover:bg-black/55"
+                    className="absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-neutral-700 shadow-md transition hover:bg-white"
                     aria-label="Imagen siguiente"
                   >
                     <ChevronRight className="h-6 w-6" />
                   </button>
-                  <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5">
-                    {images.map((_, i) => (
-                      <button
-                        key={i}
-                        type="button"
-                        onClick={() => setPhotoIndex(i)}
-                        className={`h-2 w-2 rounded-full transition-colors ${
-                          i === safeIndex ? 'bg-white' : 'bg-white/45'
-                        }`}
-                        aria-label={`Foto ${i + 1}`}
-                      />
-                    ))}
-                  </div>
                 </>
               )}
               <div className="property-badge">
-                ${property.price?.toLocaleString()}
+                {property.price != null
+                  ? `USD ${property.price.toLocaleString()}`
+                  : 'Consultar'}
               </div>
             </div>
 
-            <div>
-              <h2 className="mb-2 text-xl font-semibold text-black sm:text-2xl">
-                {property.title}
-              </h2>
-              <div className="mb-4 flex items-center text-black/70">
-                <MapPin className="mr-2 h-5 w-5 shrink-0" />
-                <span>{property.location}</span>
+            {/* Derecha: ficha */}
+            <div className="overflow-hidden rounded-xl border border-black/10 bg-white shadow-md">
+              <div
+                className="px-4 py-3 text-center text-xs font-semibold uppercase tracking-wider text-white sm:text-sm"
+                style={{ backgroundColor: 'var(--brand-accent)' }}
+              >
+                Detalles de la propiedad
+              </div>
+              <div className="p-5 sm:p-6">
+                <h2 className="mb-4 text-lg font-bold text-black sm:text-xl">
+                  {property.title}
+                </h2>
+                <div className="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
+                  <DetailField label="Tipo de propiedad" value={property.type} />
+                  <DetailField label="Ubicación" value={property.location} />
+                  <DetailField label="Dormitorios" value={String(property.bedrooms ?? 0)} />
+                  <DetailField label="Baños" value={String(property.bathrooms ?? 0)} />
+                  <DetailField
+                    label="Superficie cubierta"
+                    value={property.area != null ? `${property.area} m²` : '—'}
+                  />
+                  <DetailField label="Operación" value={property.operation || '—'} />
+                  <DetailField
+                    label="Precio"
+                    value={
+                      property.price != null
+                        ? `USD ${property.price.toLocaleString()}`
+                        : '—'
+                    }
+                  />
+                  <DetailField
+                    label="Acepta m²"
+                    value={property.acceptsSquareMeters || '—'}
+                  />
+                  {property.antiquity ? (
+                    <DetailField label="Antigüedad" value={property.antiquity} />
+                  ) : null}
+                  {property.floors != null && property.floors !== '' ? (
+                    <DetailField label="Plantas" value={String(property.floors)} />
+                  ) : null}
+                </div>
+                <p className="mt-5 text-center text-sm text-black/50">
+                  (REF. {refDisplay})
+                </p>
+
+                {n > 1 ? (
+                  <div className="mt-5 border-t border-black/10 pt-4">
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-black/50">
+                      Galería
+                    </p>
+                    <div className="flex gap-2 overflow-x-auto pb-1">
+                      {images.map((url, i) => (
+                        <button
+                          key={i}
+                          type="button"
+                          onClick={() => setPhotoIndex(i)}
+                          className={`relative shrink-0 overflow-hidden rounded-md ring-2 ring-offset-2 transition ${
+                            i === safeIndex
+                              ? 'ring-[color:var(--brand-accent)]'
+                              : 'ring-transparent opacity-80 hover:opacity-100'
+                          }`}
+                          aria-label={`Ver imagen ${i + 1}`}
+                        >
+                          <img
+                            src={url}
+                            alt=""
+                            className="h-16 w-24 object-cover sm:h-20 sm:w-32"
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <a
+                    href="https://wa.me/541151487328"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary inline-flex flex-1 items-center justify-center gap-2 sm:flex-none"
+                  >
+                    <MessageCircle className="h-5 w-5" />
+                    Contactar agente
+                  </a>
+                </div>
               </div>
             </div>
+          </div>
 
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 md:grid-cols-4 md:gap-4">
-              <div className="glass-effect rounded-lg p-4 text-center">
-                <Bed className="mx-auto mb-2 h-6 w-6 text-[color:var(--brand-accent)]" />
-                <div className="font-semibold text-black">{property.bedrooms}</div>
-                <div className="text-sm text-black/60">Habitaciones</div>
-              </div>
-              <div className="glass-effect rounded-lg p-4 text-center">
-                <Bath className="mx-auto mb-2 h-6 w-6 text-[color:var(--brand-accent)]" />
-                <div className="font-semibold text-black">{property.bathrooms}</div>
-                <div className="text-sm text-black/60">Baños</div>
-              </div>
-              <div className="glass-effect rounded-lg p-4 text-center">
-                <Square className="mx-auto mb-2 h-6 w-6 text-[color:var(--brand-accent)]" />
-                <div className="font-semibold text-black">{property.area}m²</div>
-                <div className="text-sm text-black/60">Área</div>
-              </div>
-              <div className="glass-effect rounded-lg p-4 text-center">
-                <DollarSign className="mx-auto mb-2 h-6 w-6 text-[color:var(--brand-accent)]" />
-                <div className="font-semibold text-black">{property.type}</div>
-                <div className="text-sm text-black/60">Tipo</div>
-              </div>
-            </div>
-
-            {property.description ? (
-              <div>
-                <h3 className="mb-3 text-lg font-semibold text-black">Descripción</h3>
+          <div className="mt-12 grid gap-10 border-t border-black/10 pt-10 lg:grid-cols-2">
+            <section>
+              <h3 className="mb-4 text-sm font-bold uppercase tracking-wide text-black">
+                Información básica
+              </h3>
+              {property.description ? (
                 <p className="leading-relaxed text-black/80">{property.description}</p>
-              </div>
-            ) : null}
-
-            <div className="flex flex-wrap justify-end gap-3 pt-2">
+              ) : (
+                <p className="text-black/50">
+                  Consultá con nuestro equipo para más información sobre esta propiedad.
+                </p>
+              )}
+            </section>
+            <section>
+              <h3 className="mb-4 text-sm font-bold uppercase tracking-wide text-black">
+                Contacto
+              </h3>
+              <p className="mb-4 text-sm text-black/70">
+                Escribinos por WhatsApp y te respondemos a la brevedad.
+              </p>
               <a
                 href="https://wa.me/541151487328"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary inline-flex items-center justify-center"
+                className="btn-primary inline-flex items-center justify-center gap-2"
               >
-                Contactar Agente
+                <MessageCircle className="h-5 w-5" />
+                Abrir WhatsApp
               </a>
-            </div>
+            </section>
           </div>
         </motion.div>
       </div>
