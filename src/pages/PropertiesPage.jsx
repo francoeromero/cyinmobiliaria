@@ -86,9 +86,12 @@ useEffect(() => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-3xl sm:text-4xl font-bold text-black/70 mb-4">
-            Todas las Propiedades
-          </h1>
+          <div className="mb-4 flex items-center justify-center">
+            <Grid3X3 className="mr-3 h-8 w-8 text-[color:var(--brand-accent)]" />
+            <h1 className="text-3xl font-bold text-black/70 sm:text-4xl">
+              Todas las Propiedades
+            </h1>
+          </div>
           <p className="text-black/70 text-base sm:text-lg max-w-2xl mx-auto">
             Explora nuestros desarrollos y encontra la mejor financiacion
           </p>

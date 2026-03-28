@@ -19,7 +19,10 @@ const Navbar = () => {
   ];
 
   return (
-  <nav style={{ borderBottom: '2px solid #f59e0b' }} className="navbar overflow-visible py-1">
+  <nav
+    className="navbar overflow-visible py-1"
+    style={{ borderBottom: '2px solid var(--brand-accent)' }}
+  >
 
       <div className="container mx-auto overflow-visible px-4 sm:px-6 py-3">
         <div className="flex items-center justify-between overflow-visible">
@@ -58,7 +61,7 @@ const Navbar = () => {
                   
                   {isActive && (
                     <motion.div
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-400 to-amber-400"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--brand-accent)]"
                       layoutId="activeTab"
                       initial={false}
                       transition={{ type: "spring", stiffness: 500, damping: 30 }}
@@ -70,7 +73,11 @@ const Navbar = () => {
           </div>
 
           <div className="xl:hidden">
-            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-amber-500 p-2">
+            <button
+              type="button"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 text-[color:var(--brand-accent)] hover:text-[color:var(--brand-accent-hover)]"
+            >
               {isMenuOpen ? <X size={24} /> : <Menu size={30} />}
             </button>
           </div>

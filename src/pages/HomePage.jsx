@@ -116,7 +116,8 @@ useEffect(() => {
       transition={{ duration: 0.8 }}
     >
       <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4">
-        Encuentra tu <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300">Hogar Perfecto </span>
+        Encuentra tu{' '}
+        <span className="text-[color:var(--brand-accent)]">Hogar Perfecto </span>
       </h1>
       <p className="text-lg md:text-xl text-white/80 mb-8 max-w-2xl mx-auto">
         Descubre nuevas oportunidades de pozo y a estrenar
@@ -132,7 +133,7 @@ useEffect(() => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
-            <stat.icon className="w-6 h-6 sm:w-8 sm:h-8 text-amber-400 mx-auto mb-2" />
+            <stat.icon className="mx-auto mb-2 h-6 w-6 text-[color:var(--brand-accent)] sm:h-8 sm:w-8" />
             <div className="text-xl sm:text-2xl font-bold text-white">{stat.value}</div>
             <div className="text-white/60 text-xs sm:text-sm">{stat.label}</div>
           </motion.div>
@@ -152,16 +153,21 @@ useEffect(() => {
       className="max-w-4xl mx-auto"
     >
       {/* Contenedor con glass effect y borde dorado */}
-      <div className="glass-effect rounded-2xl p-8 sm:p-12 border-2 border-amber-400/50 shadow-lg">
-        {/* Título con color dorado */}
-        <h2 className="text-4xl sm:text-5xl font-bold text-center mb-2">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-300">
-            CY Desarrollos Inmobiliarios
-          </span>
+      <div
+        className="glass-effect rounded-2xl border-2 p-8 shadow-lg sm:p-12"
+        style={{
+          borderColor: 'color-mix(in srgb, var(--brand-accent) 50%, transparent)'
+        }}
+      >
+        {/* Título */}
+        <h2 className="mb-2 text-center text-4xl font-bold sm:text-5xl">
+          <span className="text-[color:var(--brand-accent)]">CY Desarrollos Inmobiliarios</span>
         </h2>
 
         {/* Línea divisoria */}
-        <div className="h-1 w-16 bg-gradient-to-r from-amber-400 to-amber-300 mx-auto mb-10"></div>
+        <div
+          className="mx-auto mb-10 h-1 w-16 bg-[var(--brand-accent)]"
+        />
 
         {/* Contenido */}
         <div className="space-y-6 text-black/70 text-base sm:text-lg leading-relaxed">

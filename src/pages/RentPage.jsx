@@ -84,7 +84,7 @@ useEffect(() => {
           transition={{ duration: 0.6 }}
         >
           <div className="flex items-center justify-center mb-4">
-            <Key className="w-8 h-8 text-red-400 mr-3" />
+            <Key className="mr-3 h-8 w-8 text-[color:var(--brand-accent)]" />
             <h1 className="text-3xl sm:text-4xl font-bold text-black/70">
               Propiedades en Alquiler
             </h1>

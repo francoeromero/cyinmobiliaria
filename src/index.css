@@ -21,6 +21,10 @@
   --input: 217.2 32.6% 17.5%;
   --ring: 224.3 76.3% 94.1%;
   --radius: 0.5rem;
+
+  /* Acento corporativo (naranja rojizo): header, bordes, .btn-primary, CTAs */
+  --brand-accent: #d9381c;
+  --brand-accent-hover: #9a3412;
 }
 @tailwind components;
 @tailwind utilities;
@@ -61,7 +65,11 @@ body {
 }
 
 .btn-primary {
-  @apply bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-600 hover:to-amber-500 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 transform hover:scale-105;
+  @apply text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 transform hover:scale-105;
+  background-color: var(--brand-accent);
+}
+.btn-primary:hover {
+  background-color: var(--brand-accent-hover);
 }
 
 .btn-secondary {
@@ -105,7 +113,7 @@ body {
 }
 
 .navbar {
-  @apply glass-effect border-b border-white/30 sticky top-0 z-40;
+  @apply glass-effect sticky top-0 z-40;
 }
 
 .hero-section {
@@ -170,7 +178,11 @@ body {
 }
 
 .btn-primary {
-  @apply bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 transform hover:scale-105;
+  @apply text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 transform hover:scale-105;
+  background-color: var(--brand-accent);
+}
+.btn-primary:hover {
+  background-color: var(--brand-accent-hover);
 }
 
 .btn-secondary {
@@ -214,7 +226,7 @@ body {
 }
 
 .navbar {
-  @apply glass-effect border-b border-white/20 sticky top-0 z-40;
+  @apply glass-effect sticky top-0 z-40;
 }
 
 .hero-section {

@@ -45,7 +45,7 @@ const AboutPage = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="flex items-center justify-center mb-4">
-            <Users className="w-8 h-8 text-amber-400 mr-3" />
+            <Users className="mr-3 h-8 w-8 text-[color:var(--brand-accent)]" />
             <h1 className="text-3xl sm:text-4xl font-bold text-black/70">
               Nosotros
             </h1>
