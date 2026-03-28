@@ -12,6 +12,7 @@ import RentPage from '@/pages/RentPage';
 import AboutPage from '@/pages/AboutPage';
 import ContactPage from '@/pages/ContactPage';
 import AdminPage from '@/pages/AdminPage';
+import PropertyDetailPage from '@/pages/PropertyDetailPage';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path="/nosotros" element={<AboutPage />} />
             <Route path="/contacto" element={<ContactPage />} />
             <Route path="/admin" element={<AdminPage />} />
+            <Route path="/propiedad/:id" element={<PropertyDetailPage />} />
           </Routes>
         </main>
         

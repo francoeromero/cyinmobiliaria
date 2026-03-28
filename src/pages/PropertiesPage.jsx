@@ -2,18 +2,18 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Grid3X3, List, Search } from 'lucide-react';
 import PropertyCard from '@/components/PropertyCard';
 import SearchFilter from '@/components/SearchFilter';
-import PropertyModal from '@/components/PropertyModal';
 import { getProperties } from '@/utils/localStorage';
 
 const PropertiesPage = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [properties, setProperties] = useState([]);
   const [filteredProperties, setFilteredProperties] = useState([]);
   const [filters, setFilters] = useState({});
-  const [selectedProperty, setSelectedProperty] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [viewMode, setViewMode] = useState('grid');
 
 useEffect(() => {
@@ -68,8 +68,7 @@ useEffect(() => {
   };
 
   const handlePropertyClick = (property) => {
-    setSelectedProperty(property);
-    setIsModalOpen(true);
+    navigate(`/propiedad/${property.id}`, { state: { from: location.pathname } });
   };
 
   return (
@@ -187,12 +186,6 @@ useEffect(() => {
           </motion.div>
         )}
       </div>
-
-      <PropertyModal
-        property={selectedProperty}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
     </div>
   );
 };

@@ -11,3 +11,8 @@ export const getPropertyImageUrls = (property) => {
   }
   return [];
 };
+
+export const getPrimaryImageUrl = (property) => {
+  const urls = getPropertyImageUrls(property);
+  return urls[0] || '';
+};

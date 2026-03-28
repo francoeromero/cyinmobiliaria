@@ -2,14 +2,16 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { Plus, Edit, Trash2, Search, Eye } from 'lucide-react';
 import PropertyForm from '@/components/PropertyForm';
-import PropertyModal from '@/components/PropertyModal';
 import SearchFilter from '@/components/SearchFilter';
 import { getProperties, addProperty, updateProperty, deleteProperty } from '@/utils/localStorage';
 import { useToast } from '@/components/ui/use-toast';
 
 const AdminPage = () => {
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
   const [isAuthorized, setIsAuthorized] = useState(() => {
     const password = prompt("Ingrese la contraseña para acceder:");
@@ -22,27 +24,23 @@ const AdminPage = () => {
     return true;
   });
 
-  if (!isAuthorized) return null;
-
-
-
-  const { toast } = useToast();
   const [properties, setProperties] = useState([]);
   const [filteredProperties, setFilteredProperties] = useState([]);
   const [filters, setFilters] = useState({});
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
-  const [selectedProperty, setSelectedProperty] = useState(null);
   const [editingProperty, setEditingProperty] = useState(null);
 
-useEffect(() => {
-  const fetchProperties = async () => {
-    const loadedProperties = await getProperties();
-    setProperties(loadedProperties);
-    setFilteredProperties(loadedProperties);
-  };
-  fetchProperties();
-}, []);
+  useEffect(() => {
+    if (!isAuthorized) return;
+    const fetchProperties = async () => {
+      const loadedProperties = await getProperties();
+      setProperties(loadedProperties);
+      setFilteredProperties(loadedProperties);
+    };
+    fetchProperties();
+  }, [isAuthorized]);
+
+  if (!isAuthorized) return null;
 
   const handleSearch = () => {
     let filtered = properties;
@@ -124,8 +122,7 @@ const handleDeleteProperty = async (propertyId) => {
 };
 
   const handleViewProperty = (property) => {
-    setSelectedProperty(property);
-    setIsViewModalOpen(true);
+    navigate(`/propiedad/${property.id}`, { state: { from: '/admin' } });
   };
 
   const handleNewProperty = () => {
@@ -339,12 +336,6 @@ const handleDeleteProperty = async (propertyId) => {
           setEditingProperty(null);
         }}
         onSave={handleSaveProperty}
-      />
-
-      <PropertyModal
-        property={selectedProperty}
-        isOpen={isViewModalOpen}
-        onClose={() => setIsViewModalOpen(false)}
       />
     </div>
   );

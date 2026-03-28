@@ -2,20 +2,19 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Search, TrendingUp, Award, Users, ArrowRight } from 'lucide-react';
 import PropertyCarousel from '@/components/PropertyCarousel';
 import SearchFilter from '@/components/SearchFilter';
 import SearchResultsCarousel from '@/components/SearchResultsCarousel';
-import PropertyModal from '@/components/PropertyModal';
 import { getProperties } from '@/utils/localStorage';
 
 const HomePage = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [properties, setProperties] = useState([]);
   const [filteredProperties, setFilteredProperties] = useState([]);
   const [filters, setFilters] = useState({});
-  const [selectedProperty, setSelectedProperty] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
 
 useEffect(() => {
@@ -71,8 +70,7 @@ useEffect(() => {
   };
 
   const handlePropertyClick = (property) => {
-    setSelectedProperty(property);
-    setIsModalOpen(true);
+    navigate(`/propiedad/${property.id}`, { state: { from: location.pathname } });
   };
 
   const stats = [
@@ -265,12 +263,6 @@ useEffect(() => {
           </div>
         </section>
       )}
-
-      <PropertyModal
-        property={selectedProperty}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
     </div>
   );
 };
