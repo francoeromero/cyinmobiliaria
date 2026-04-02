@@ -32,11 +32,19 @@ const chatPanelTransition = {
 	mass: 0.72,
 };
 
+/** Alineado con breakpoint `md` de Tailwind (768px): desktop abre el chat al cargar; móvil no. */
+function getIsDesktopViewport() {
+	if (typeof window === 'undefined') return true;
+	return window.matchMedia('(min-width: 768px)').matches;
+}
+
 function ChatBotWidget() {
 	const navigate = useNavigate();
 	const reduceMotion = useReducedMotion();
-	const [open, setOpen] = useState(true);
-	const [messages, setMessages] = useState(() => [{ ...WELCOME_MESSAGE }]);
+	const [open, setOpen] = useState(getIsDesktopViewport);
+	const [messages, setMessages] = useState(() =>
+		getIsDesktopViewport() ? [{ ...WELCOME_MESSAGE }] : []
+	);
 	const [draft, setDraft] = useState('');
 	const [selectedOperation, setSelectedOperation] = useState(null);
 	const listEndRef = useRef(null);
