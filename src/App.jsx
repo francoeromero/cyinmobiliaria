@@ -13,6 +13,7 @@ import AboutPage from '@/pages/AboutPage';
 import ContactPage from '@/pages/ContactPage';
 import AdminPage from '@/pages/AdminPage';
 import PropertyDetailPage from '@/pages/PropertyDetailPage';
+import ChatBotWidget from '@/components/ChatBotWidget';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         </main>
         
         <Footer />
+        <ChatBotWidget />
         <Toaster />
       </div>
     </Router>
