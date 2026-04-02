@@ -25,6 +25,9 @@
   /* Acento corporativo (naranja rojizo): header, bordes, .btn-primary, CTAs */
   --brand-accent: #d9381c;
   --brand-accent-hover: #9a3412;
+
+  /* Botón scroll-to-top: justo bajo el navbar (logo 82px + py nav + py contenedor + borde + 2px) */
+  --scroll-top-below-navbar: calc(82px + 0.5rem + 1.5rem + 2px + 0.125rem);
 }
 
 /* Badges en cards de propiedad (precio, operación, Acepta m²) */

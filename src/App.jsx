@@ -1,6 +1,8 @@
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ScrollToTop from '@/components/ScrollToTop';
+import ScrollToTopButton from '@/components/ScrollToTopButton';
 import { Helmet } from 'react-helmet';
 import { Toaster } from '@/components/ui/toaster';
 import Navbar from '@/components/Navbar';
@@ -18,6 +20,7 @@ import ChatBotWidget from '@/components/ChatBotWidget';
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <div className="min-h-screen flex flex-col">
         <Helmet>
           <title>RC PROPIEDADES - Sistema de Gestión Inmobiliaria</title>
@@ -41,6 +44,7 @@ function App() {
         
         <Footer />
         <ChatBotWidget />
+        <ScrollToTopButton />
         <Toaster />
       </div>
     </Router>

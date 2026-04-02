@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Home, ShoppingCart, Key, Grid3X3, Users, Phone, Settings, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { scrollPageToTop } from '@/components/ScrollToTop';
 
 const Navbar = () => {
   const location = useLocation();
@@ -26,7 +27,7 @@ const Navbar = () => {
 
       <div className="container mx-auto overflow-visible px-4 sm:px-6 py-3">
         <div className="flex items-center justify-between overflow-visible">
-          <Link to="/" className="relative flex items-center space-x-2 overflow-visible">
+          <Link to="/" className="relative flex items-center space-x-2 overflow-visible" onClick={scrollPageToTop}>
             <div className="relative z-10 h-[82px] w-[82px] shrink-0 overflow-visible bg-white-lg">
               <img
                 src="/img/logo_header.png"
@@ -44,7 +45,7 @@ const Navbar = () => {
               const isActive = location.pathname === item.path;
               
               return (
-                <Link key={item.path} to={item.path} className="relative">
+                <Link key={item.path} to={item.path} className="relative" onClick={scrollPageToTop}>
                   <motion.div
                     className={`flex items-center space-x-2 rounded-lg px-3 py-2 transition-all duration-300 ${
                       isActive
@@ -98,7 +99,10 @@ const Navbar = () => {
                   <Link
                     key={item.path}
                     to={item.path}
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      scrollPageToTop();
+                    }}
                     className={`flex w-full items-center justify-center space-x-3 rounded-lg py-3 text-center transition-colors duration-300 ${
                       isActive
                         ? 'bg-black/20 text-[color:var(--brand-accent)]'
