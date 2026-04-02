@@ -163,7 +163,7 @@ function ChatBotWidget() {
 						</div>
 						<div className="min-w-0 flex-1">
 							<p className="truncate text-sm font-semibold tracking-tight">
-								RC Propiedades
+								CY desarrollos inmobiliarios
 							</p>
 							<p className="text-xs text-white/85">En línea · Asistente</p>
 						</div>
